@@ -1,0 +1,10 @@
+name: terraform-aws-s3-bucket
+title: InSpec Profile
+maintainer: The Authors
+copyright: The Authors
+copyright_email: manprad2@publicisgroupe.net
+license: Apache-2.0
+summary: An InSpec Compliance Profile
+version: 0.1.0
+supports:
+  - platform: aws
