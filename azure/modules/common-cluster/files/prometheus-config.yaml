@@ -1,0 +1,37 @@
+global:
+  scrape_interval: 30s
+scrape_configs:
+- job_name: poc
+  static_configs:
+  - targets: ['app-monitoring-prometheus.devopstestfield.svc.cluster.local:80']
+- job_name: argocd-server-metrics
+  static_configs:
+  - targets: ['argo-argocd-server-metrics.argocd.svc.cluster.local:8083', ]
+- job_name: argocd--metrics
+  static_configs:
+  - targets: ['argo-argocd-application-controller-metrics.argocd.svc.cluster.local:8082']
+- job_name: argocd-repo-server
+  static_configs:
+  - targets: ['argo-argocd-repo-server-metrics.argocd.svc.cluster.local:8084']
+- job_name: "blackbox"
+  metrics_path: /probe
+  params:
+    module: [http_2xx] # Look for a HTTP 200 response.
+  static_configs:
+    - targets:
+        - http://argocd.dev.ifesw.com/
+        - http://argocd.integration.ifesw.com/
+        - http://argocd.production.ifesw.com/
+        - http://argocd.staging.ifesw.com/
+        - http://git.<some-name-here>.com
+  relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: instance
+    - target_label: __address__
+      replacement: 10.200.200.18 # The blackbox exporter's real hostname:port.
+- job_name: "blackbox_exporter" # collect blackbox exporter's operational metrics.
+  metrics_path: "/metrics"
+  static_configs:
+    - targets: ["10.200.200.18"]
