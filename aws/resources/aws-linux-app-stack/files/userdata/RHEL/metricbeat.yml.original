@@ -1,0 +1,35 @@
+#-------------------------------------
+#Metricbeat 6.8x  Linux configuration:
+#-------------------------------------
+
+metricbeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: true
+  reload.period: 10s
+
+fields_under_root: true
+fields:
+  TenantCode: "<TENANT_CODE>"
+  PlatformType: "<PLATFORM>"
+  
+setup.template.enabled: false
+
+output:
+  kafka:
+    enabled: true
+    hosts: ["<KAFKA_ELB>:9092"]
+    topic: "<TENANT_KAFKA_BEAT_TOPIC>"
+    partition.round_robin:
+      reachable_only: false
+    required_acks: 1
+    compression: gzip
+    max_message_bytes: 1000000
+    version: "<TENANT_KAFKA_METRICBEAT_CONFIGURATION_VERSION>"
+
+logging:
+  to_files: true
+  files:
+    path: /var/log/metricbeat
+    rotateeverybytes: 10485760 # = 10MB
+    keepfiles: 10
+  level: info
