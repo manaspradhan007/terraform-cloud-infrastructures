@@ -1,0 +1,29 @@
+module "kubernetes_cluster" {
+  source                               = "../../resources/kubernetes-cluster"
+  project_id                           = var.project_id
+  cluster_name                         = var.cluster_name
+  nodepool_name                        = var.nodepool_name
+  machine_type                         = var.machine_type
+  minimum                              = var.minimum
+  maximum                              = var.maximum
+  availability_zones                   = var.availability_zones
+  os_name                              = var.os_name
+  os_version                           = var.os_version
+  allowed_cidrs_list                   = var.allowed_cidrs_list
+  zones                                = var.zones
+  acl_enabled                          = var.acl_enabled
+  enable_kubernetes_version_updates    = var.enable_kubernetes_version_updates
+  enable_machine_image_version_updates = var.enable_machine_image_version_updates
+  start                                = var.start
+  end                                  = var.end
+  volume_size                          = var.volume_size
+  volume_type                          = var.volume_type
+  taints                               = var.taints
+  cpu_availability_zones               = var.cpu_availability_zones
+  cpu_volume_size                      = var.cpu_volume_size
+  cpu_maximum                          = var. cpu_maximum
+  cpu_minimum                          = var.cpu_minimum
+  cpu_machine_type                     = var.cpu_machine_type
+  cpu_nodepool_name                    = var.cpu_nodepool_name
+  cpu_volume_type                      = var.cpu_volume_type
+}
