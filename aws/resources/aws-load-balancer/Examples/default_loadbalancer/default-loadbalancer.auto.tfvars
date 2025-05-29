@@ -29,6 +29,6 @@ availability_zone = ["1"]
 ########
 tags = {
     "TenantCode" = "D1GS01"
-    "0050:InfraMgmt" = "Skynet"
+    "0050:InfraMgmt" = "<something>"
     "Environemnt"   = "dev"
 }

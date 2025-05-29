@@ -23,6 +23,6 @@ product = "al"
 ########
 tags = {
     "TenantCode" = "D1GS01"
-    "0050:InfraMgmt" = "Skynet"
+    "0050:InfraMgmt" = "<something>"
     "Environemnt"   = "dev"
 }
